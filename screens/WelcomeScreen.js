@@ -7,10 +7,13 @@ import {
   Dimensions, 
 } from 'react-native';
 
-import BrandText from '../components/stylized/BrandText';
-import RegularText from '../components/stylized/RegularText';
-import GradientButton from '../components/stylized/GradientButton';
-import TextButton from '../components/stylized/TextButton';
+import { 
+  BrandText,
+  RegularText,
+  GradientButton,
+  TextButton,
+  Logo,
+} from '../components';
 
 const WelcomeScreen = ({ devWindow }) => {
 
@@ -21,11 +24,7 @@ const WelcomeScreen = ({ devWindow }) => {
         height: devWindow.height,
         padding: devWindow.width / 10}}>
 
-        <View style={styles.logo}>
-          <BrandText style={styles.logoText}>Where's</BrandText>
-          <BrandText style={styles.logoText}>My</BrandText>
-          <BrandText style={styles.logoText}>Sh*t?</BrandText>
-        </View>
+        <Logo />
 
         <View style={{
           ...styles.taglineContainer,
@@ -58,9 +57,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
-  },
-  logoText: {
-    fontSize: 72,
   },
   taglineContainer: {
     justifyContent: 'space-around',
