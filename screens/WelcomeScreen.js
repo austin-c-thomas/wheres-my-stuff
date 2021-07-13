@@ -4,7 +4,8 @@ import {
   ScrollView,
   Button,
   StyleSheet,
-  Dimensions, 
+  Dimensions,
+  ImageBackground, 
 } from 'react-native';
 
 import { 
@@ -15,42 +16,43 @@ import {
   Logo,
 } from '../components';
 
-const WelcomeScreen = ({ windowDimensions }) => {
+import VerticalBackground from '../assets/wms-background-vertical.png';
+import HorizontalBackground from '../assets/wms-background-horizontal.png';
 
-  console.log(windowDimensions);
+const WelcomeScreen = ({ windowDimensions }) => {
   return (
     <ScrollView>
-      <View style={
-        windowDimensions.height > 500 ? 
-        {...styles.screenVertical, height: windowDimensions.height} : 
-        {...styles.screenHorizontal, height: windowDimensions.height}
-        }>
-        
-        <View>
-          <Logo size={windowDimensions.height > 500 ? 72 : 64}/>
-          <View style={styles.taglineContainer}>              
-            <RegularText style={styles.taglineText}>All your stuff.</RegularText>
-            <RegularText style={styles.taglineText}>Sorted.</RegularText>
-          </View>
-        </View>
+      <View style={styles.screen}>
+          <ImageBackground 
+            source={windowDimensions.height > 500 ? VerticalBackground : HorizontalBackground}
+            resizeMode='cover'
+            style={windowDimensions.height > 500 ? 
+              {...styles.backgroundVertical, height: windowDimensions.height} : 
+              {...styles.backgroundHorizontal, height: windowDimensions.height}}>
+            <View>
+              <Logo size={windowDimensions.height > 500 ? 72 : 64}/>
+              <View style={styles.taglineContainer}>              
+                <RegularText style={styles.taglineText}>All your stuff.</RegularText>
+                <RegularText style={styles.taglineText}>Sorted.</RegularText>
+              </View>
+            </View>
 
-        <View style={
-          windowDimensions.height > 500 ?
-          {width: '100%'} :
-          {width: '40%'}
-        }>
+            <View style={
+              windowDimensions.height > 500 ?
+              {width: '100%'} :
+              {width: '40%'}
+            }>
 
-          <View style={styles.buttonContainer}>
-            <GradientButton>Get Started</GradientButton>
-          </View>
+              <View style={styles.buttonContainer}>
+                <GradientButton>Get Started</GradientButton>
+              </View>
 
-          <View style={styles.haveAccountContainer}>
-            <RegularText style={styles.haveAccountText}>Have an account? </RegularText>
-            <TextButton>Sign In</TextButton>
-          </View>
-        </View>
-        
-
+              <View style={styles.haveAccountContainer}>
+                <RegularText style={styles.haveAccountText}>Have an account? </RegularText>
+                <TextButton>Sign In</TextButton>
+              </View>
+            </View>
+          </ImageBackground>
       </View>
     </ScrollView>
 
@@ -58,12 +60,15 @@ const WelcomeScreen = ({ windowDimensions }) => {
 };
 
 const styles = StyleSheet.create({
-  screenVertical: {
+  screen: {
+    flex: 1,
+  },
+  backgroundVertical: {
     flex: 1,
     justifyContent: 'center',
     padding: '10%',
   },
-  screenHorizontal: {
+  backgroundHorizontal: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -85,7 +90,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   } 
-
 });
 
 export default WelcomeScreen;
