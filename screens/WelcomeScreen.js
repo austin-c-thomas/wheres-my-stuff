@@ -8,6 +8,7 @@ import {
   ImageBackground, 
 } from 'react-native';
 
+
 import { 
   BrandText,
   RegularText,
@@ -20,6 +21,9 @@ import VerticalBackground from '../assets/wms-background-vertical.png';
 import HorizontalBackground from '../assets/wms-background-horizontal.png';
 
 const WelcomeScreen = ({ windowDimensions }) => {
+
+  console.log('DEVICE TYPE', windowDimensions.deviceType);
+
   return (
     <ScrollView>
       <View style={styles.screen}>

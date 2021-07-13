@@ -6,6 +6,8 @@ import {
   Dimensions, 
 } from 'react-native';
 
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 // import { StatusBar } from 'expo-status-bar';
@@ -22,14 +24,26 @@ const fetchFonts = () => {
   });
 };
 
+// Attempt to determine if the device is a phone or a tablet
+const getDeviceType = (width, height) => {
+  if (
+    (height > width && height / width >= 1.7) || 
+    (width > height && width / height >= 1.7)
+  ) {
+    return ('phone');
+  } else {
+    return ('tablet');
+  };
+};
+
 export default function App() {
   const [ fontLoaded, setFontLoaded ] = useState(false);
   const [ availableDeviceHeight, setAvailableDeviceHeight ] = useState(Dimensions.get('window').height);
   const [ availableDeviceWidth, setAvailableDeviceWidth ] = useState(Dimensions.get('window').width);
-
+  const deviceType = getDeviceType(Dimensions.get('window').width, Dimensions.get('window').height);
 
   useEffect(() => {
-    const updateDimensions = () => {
+    const updateDimensions = async () => {
       setAvailableDeviceHeight(Dimensions.get('window').height);
       setAvailableDeviceWidth(Dimensions.get('window').width);
     };
@@ -51,7 +65,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <WelcomeScreen windowDimensions={{ height: availableDeviceHeight, width: availableDeviceWidth }}/>
+      <WelcomeScreen windowDimensions={{ height: availableDeviceHeight, width: availableDeviceWidth, deviceType: deviceType }}/>
       {/* <StatusBar style="auto" /> */}
     </View>
   );
