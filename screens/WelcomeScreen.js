@@ -49,7 +49,7 @@ const WelcomeScreen = ({ windowDimensions }) => {
 
               <View style={styles.haveAccountContainer}>
                 <RegularText style={styles.haveAccountText}>Have an account? </RegularText>
-                <TextButton>Sign In</TextButton>
+                <TextButton style={styles.haveAccountText}>Sign In</TextButton>
               </View>
             </View>
           </ImageBackground>
@@ -89,7 +89,10 @@ const styles = StyleSheet.create({
     marginVertical: '5%',
     flexDirection: 'row',
     justifyContent: 'center',
-  } 
+  },
+  haveAccountText: {
+    fontSize: 18,
+  }
 });
 
 export default WelcomeScreen;
