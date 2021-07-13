@@ -1,21 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import BrandText from './stylized/BrandText';
 
-const Logo = () => {
+const Logo = ({ size }) => {
   return (
-    <View style={styles.logo}>
-      <BrandText style={styles.logoText}>Where's</BrandText>
-      <BrandText style={styles.logoText}>My</BrandText>
-      <BrandText style={styles.logoText}>Sh*t?</BrandText>
+    <View>
+      <BrandText style={{fontSize: size}}>Where's</BrandText>
+      <BrandText style={{fontSize: size}}>My</BrandText>
+      <BrandText style={{fontSize: size}}>Sh*t?</BrandText>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  logoText: {
-    fontSize: 72,
-  }, 
-})
 
 export default Logo;

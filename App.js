@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <WelcomeScreen devWindow={{ height: availableDeviceHeight, width: availableDeviceWidth }}/>
+      <WelcomeScreen windowDimensions={{ height: availableDeviceHeight, width: availableDeviceWidth }}/>
       {/* <StatusBar style="auto" /> */}
     </View>
   );
