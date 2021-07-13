@@ -22,7 +22,8 @@ const GradientButton = ({ children }) => {
   // };
 
   return (
-    <View style={styles.buttonContainer}>
+    <View style={styles.buttonShadow}>
+      <View style={styles.buttonContainer}>
       <ButtonComponent onPress={() => {}} activeOpacity={0.8}>
         <LinearGradient 
           colors={['#29ABE2', '#1B1464']}
@@ -33,16 +34,28 @@ const GradientButton = ({ children }) => {
           </LinearGradient>
       </ButtonComponent>
     </View>
+
+    </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
+  buttonShadow: {
+    shadowColor: '#ccc',
+    shadowOpacity: 1,
+    shadowOffset: {
+    width: 4, 
+    height: 4,
+    },
+  },
   buttonContainer: {
-    borderRadius: 30,
+    borderRadius: 45,
     overflow: 'hidden',
+    elevation: 10,
   },
   button: {
-    height: 60,
+    height: 90,
     justifyContent: 'center',
     alignItems: 'center',
   },
