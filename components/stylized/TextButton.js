@@ -7,10 +7,10 @@ import {
 import { Colors } from '../../constants/Colors';
 import RegularText from './RegularText';
 
-const TextButton = ({ children }) => {
+const TextButton = ({ children, style }) => {
   return (
     <TouchableOpacity onPress={() => {}} activeOpacity={0.6}>
-      <RegularText style={styles.buttonText}>{children}</RegularText>
+      <RegularText style={{...styles.buttonText, ...style}}>{children}</RegularText>
     </TouchableOpacity>
   );
 };
