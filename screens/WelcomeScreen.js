@@ -20,21 +20,21 @@ import {
 import VerticalBackground from '../assets/wms-background-vertical.png';
 import HorizontalBackground from '../assets/wms-background-horizontal.png';
 
-const WelcomeScreen = ({ windowDimensions }) => {
+const WelcomeScreen = ({ dimensionsInfo }) => {
 
-  console.log('DEVICE TYPE', windowDimensions.deviceType);
+  console.log('Window Dimensions: ', dimensionsInfo);
 
   return (
     <ScrollView>
       <View style={styles.screen}>
           <ImageBackground 
-            source={windowDimensions.height > 500 ? VerticalBackground : HorizontalBackground}
+            source={dimensionsInfo.height > 500 ? VerticalBackground : HorizontalBackground}
             resizeMode='cover'
-            style={windowDimensions.height > 500 ? 
-              {...styles.backgroundVertical, height: windowDimensions.height} : 
-              {...styles.backgroundHorizontal, height: windowDimensions.height}}>
+            style={dimensionsInfo.height > 500 ? 
+              {...styles.backgroundVertical, height: dimensionsInfo.height} : 
+              {...styles.backgroundHorizontal, height: dimensionsInfo.height}}>
             <View>
-              <Logo size={windowDimensions.height > 500 ? 72 : 64}/>
+              <Logo size={dimensionsInfo.height > 500 ? dimensionsInfo.width / 6 : dimensionsInfo.width / 14}/>
               <View style={styles.taglineContainer}>              
                 <RegularText style={styles.taglineText}>All your stuff.</RegularText>
                 <RegularText style={styles.taglineText}>Sorted.</RegularText>
@@ -42,7 +42,7 @@ const WelcomeScreen = ({ windowDimensions }) => {
             </View>
 
             <View style={
-              windowDimensions.height > 500 ?
+              dimensionsInfo.height > 500 ?
               {width: '100%'} :
               {width: '40%'}
             }>

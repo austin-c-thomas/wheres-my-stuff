@@ -24,6 +24,15 @@ const fetchFonts = () => {
   });
 };
 
+// Attempt to determine device orientation (without expo)
+const getOrientation = (width, height) => {
+  if (height > width) {
+    return 'portrait'
+  } else {
+    return 'landscape'
+  };
+};
+
 // Attempt to determine if the device is a phone or a tablet
 const getDeviceType = (width, height) => {
   if (
@@ -38,14 +47,23 @@ const getDeviceType = (width, height) => {
 
 export default function App() {
   const [ fontLoaded, setFontLoaded ] = useState(false);
-  const [ availableDeviceHeight, setAvailableDeviceHeight ] = useState(Dimensions.get('window').height);
-  const [ availableDeviceWidth, setAvailableDeviceWidth ] = useState(Dimensions.get('window').width);
   const deviceType = getDeviceType(Dimensions.get('window').width, Dimensions.get('window').height);
+
+  const [ dimensionsInfo, setDimensionsInfo ] = useState({
+    height: Dimensions.get('window').height, 
+    width: Dimensions.get('window').width, 
+    orientation: getOrientation(Dimensions.get('window').width, Dimensions.get('window').height),
+    deviceType: deviceType, 
+  });
 
   useEffect(() => {
     const updateDimensions = async () => {
-      setAvailableDeviceHeight(Dimensions.get('window').height);
-      setAvailableDeviceWidth(Dimensions.get('window').width);
+      setDimensionsInfo({
+        height: Dimensions.get('window').height, 
+        width: Dimensions.get('window').width, 
+        orientation: getOrientation(Dimensions.get('window').width, Dimensions.get('window').height),
+        deviceType: deviceType, 
+      });
     };
     Dimensions.addEventListener('change', updateDimensions);
     return () => {
@@ -65,7 +83,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <WelcomeScreen windowDimensions={{ height: availableDeviceHeight, width: availableDeviceWidth, deviceType: deviceType }}/>
+        <WelcomeScreen dimensionsInfo={dimensionsInfo}/>
       {/* <StatusBar style="auto" /> */}
     </View>
   );
@@ -73,9 +91,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
